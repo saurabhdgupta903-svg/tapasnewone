@@ -74,7 +74,8 @@ export default function HomePage() {
               Mission
             </h3>
             <p className="text-[1.03rem] text-tapas-muted leading-[1.65]">
-              TAPAS-PCE organizes various informative sessions on topics including meditation, mental health, inner peace, etc.
+              TAPAS-PCE organizes various informative sessions on topics including meditation,
+              mental health, inner peace, etc.
             </p>
           </div>
           <div className="bg-tapas-soft border border-tapas-border rounded-[12px] p-8 md:p-9 shadow-[0_2px_12px_rgba(11,120,200,0.04)] flex flex-col">
@@ -82,7 +83,8 @@ export default function HomePage() {
               Vision
             </h3>
             <p className="text-[1.03rem] text-tapas-muted leading-[1.65]">
-              TAPAS-PCE comes under the umbrella of Heartfulness, where we follow the four simple steps: relax, meditate, rejuvenate, and connect.
+              TAPAS-PCE comes under the umbrella of Heartfulness, where we follow the four simple
+              steps: relax, meditate, rejuvenate, and connect.
             </p>
           </div>
         </div>
@@ -102,10 +104,7 @@ export default function HomePage() {
           </h2>
         </div>
         <div className="bg-tapas-soft border border-tapas-border rounded-[12px] p-6 sm:p-11 grid grid-cols-1 sm:grid-cols-3 gap-8 sm:gap-4">
-          <Stat
-            value="20,000+"
-            label="students have practiced meditation through TAPAS-PCE"
-          />
+          <Stat value="20,000+" label="students have practiced meditation through TAPAS-PCE" />
           <Stat
             value="200+"
             label="meditation sessions and wellness programs organized on campus"
@@ -164,16 +163,10 @@ export default function HomePage() {
                 >
                   &ldquo;
                 </div>
-                <p className="text-[0.97rem] text-tapas-muted leading-[1.65] italic">
-                  {t.text}
-                </p>
+                <p className="text-[0.97rem] text-tapas-muted leading-[1.65] italic">{t.text}</p>
                 <div className="flex flex-col gap-[0.15rem] mt-auto pt-3 border-t border-tapas-border">
-                  <span className="font-semibold text-[0.95rem] text-tapas-text">
-                    {t.name}
-                  </span>
-                  <span className="text-[0.82rem] text-tapas-muted">
-                    {t.role}
-                  </span>
+                  <span className="font-semibold text-[0.95rem] text-tapas-text">{t.name}</span>
+                  <span className="text-[0.82rem] text-tapas-muted">{t.role}</span>
                 </div>
               </div>
             ))}

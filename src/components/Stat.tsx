@@ -10,9 +10,7 @@ export default function Stat({ value, label }: StatProps) {
       <div className="font-heading text-[clamp(2rem,3.5vw,2.75rem)] font-bold text-tapas-text leading-[1.1] mb-[0.65rem]">
         {value}
       </div>
-      <div className="text-[0.93rem] text-tapas-muted leading-[1.5] max-w-[15rem]">
-        {label}
-      </div>
+      <div className="text-[0.93rem] text-tapas-muted leading-[1.5] max-w-[15rem]">{label}</div>
     </div>
   );
 }
