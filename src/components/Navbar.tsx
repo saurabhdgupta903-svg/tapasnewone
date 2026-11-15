@@ -4,12 +4,12 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { NavLinkItem } from '@/types';
 
 /**
- * Tapas Navigation Bar
+ * TAPAS Navigation Bar
  * Features the TAPAS logo on the left, primary navigation links with active underline,
- * "Join Tapas" CTA button on the right, and a responsive hamburger menu for mobile devices.
+ * "Join Us" CTA button on the right, and a responsive hamburger menu for mobile devices.
+ * Order: Home, About, Team, Events, Gallery, Resources, Join Us
  */
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -18,18 +18,18 @@ export default function Navbar() {
   const toggleMenu = () => setMenuOpen((prev) => !prev);
   const closeMenu = () => setMenuOpen(false);
 
-  const navLinks: NavLinkItem[] = [
-    { name: 'Home', path: '/' },
-    { name: 'About', path: '/about' },
-    { name: 'Meditation', path: '/meditation' },
-    { name: 'Events', path: '/events' },
-    { name: 'Resources', path: '/resources' },
-    { name: 'Team', path: '/team' },
+  const navLinks = [
+    { name: 'Home', path: '/', pagePath: '/' },
+    { name: 'About', path: '/#about', pagePath: '/about' },
+    { name: 'Team', path: '/#team', pagePath: '/team' },
+    { name: 'Events', path: '/#events', pagePath: '/events' },
+    { name: 'Gallery', path: '/#gallery', pagePath: '/gallery' },
+    { name: 'Resources', path: '/resources', pagePath: '/resources' },
   ];
 
-  const isActive = (path: string) => {
-    if (path === '/') return pathname === '/';
-    return pathname.startsWith(path);
+  const isActive = (pagePath: string) => {
+    if (pagePath === '/') return pathname === '/';
+    return pathname.startsWith(pagePath);
   };
 
   return (
@@ -39,7 +39,7 @@ export default function Navbar() {
           <div className="relative h-[2.75rem] w-[140px]">
             <Image
               src="/images/tapas-logo.png"
-              alt="TAPAS-PCE Logo"
+              alt="TAPAS Logo"
               fill
               priority
               className="object-contain object-left"
@@ -51,7 +51,7 @@ export default function Navbar() {
         <nav className="hidden min-[992px]:block" aria-label="Main Navigation">
           <ul className="flex list-none gap-[1.75rem] items-center">
             {navLinks.map((item) => {
-              const active = isActive(item.path);
+              const active = isActive(item.pagePath);
               return (
                 <li key={item.name}>
                   <Link
@@ -76,7 +76,7 @@ export default function Navbar() {
             href="/join"
             className="inline-flex items-center justify-center bg-tapas-accent text-white px-5 py-[0.6rem] rounded-[6px] text-[0.95rem] font-semibold transition-colors duration-200 hover:bg-tapas-accent-hover"
           >
-            Join Tapas
+            Join Us
           </Link>
         </div>
 
@@ -111,7 +111,7 @@ export default function Navbar() {
         <div className="flex flex-col bg-tapas-soft border-t border-tapas-border px-6 pt-5 pb-8 gap-5 min-[992px]:hidden">
           <ul className="list-none flex flex-col gap-4">
             {navLinks.map((item) => {
-              const active = isActive(item.path);
+              const active = isActive(item.pagePath);
               return (
                 <li key={item.name}>
                   <Link
@@ -135,7 +135,7 @@ export default function Navbar() {
               className="block text-center bg-tapas-accent text-white px-5 py-3 rounded-[6px] font-semibold transition-colors duration-200 hover:bg-tapas-accent-hover"
               onClick={closeMenu}
             >
-              Join Tapas
+              Join Us
             </Link>
           </div>
         </div>

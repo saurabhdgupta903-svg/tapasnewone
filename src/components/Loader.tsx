@@ -43,12 +43,12 @@ export default function Loader({ onFinish }: LoaderProps) {
         isFading ? 'opacity-0 invisible pointer-events-none' : 'opacity-100 visible'
       }`}
       role="status"
-      aria-label="Loading TAPAS-PCE"
+      aria-label="Loading TAPAS"
     >
       <div className="relative w-[min(70vw,340px)] aspect-[520/280] animate-fade-pulse motion-reduce:animate-none motion-reduce:opacity-100">
         <Image
           src="/images/tapas-logo.png"
-          alt="TAPAS-PCE Heartfulness Tapas Meditation and Wellness Club Logo"
+          alt="TAPAS — Heartfulness Meditation and Wellness Club Logo"
           fill
           priority
           className="object-contain"

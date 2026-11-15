@@ -10,6 +10,18 @@ export interface EventItem {
   date: string;
 }
 
+export interface AwardItem {
+  id: string;
+  title: string;
+  img: string;
+  badge?: string;
+}
+
+export interface EventStatItem {
+  event: string;
+  students: string;
+}
+
 export interface TestimonialItem {
   text: string;
   name: string;
