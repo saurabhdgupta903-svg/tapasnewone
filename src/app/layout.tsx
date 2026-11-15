@@ -3,9 +3,9 @@ import SiteLayout from '@/components/SiteLayout';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'TAPAS-PCE | Heartfulness Tapas Meditation and Wellness Club',
+  title: 'TAPAS | Relax, Meditate, Rejuvenate and Connect',
   description:
-    'Heartfulness Tapas Meditation and Wellness Club, Pillai College of Engineering, New Panvel',
+    'TAPAS — Heartfulness Meditation and Wellness Club at Pillai College of Engineering, New Panvel. Relax, Meditate, Rejuvenate and Connect.',
   icons: {
     icon: '/images/tapas-logo.png',
   },

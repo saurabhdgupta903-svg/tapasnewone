@@ -1,3 +1,5 @@
+import Link from 'next/link';
+import Image from 'next/image';
 import { NetworkLink } from '@/types';
 
 /* ── Inline SVG icons ── no icon library needed ── */
@@ -8,7 +10,7 @@ function IconInstagram() {
       viewBox="0 0 24 24"
       aria-hidden="true"
       focusable="false"
-      className="w-[1.2rem] h-[1.2rem] shrink-0 block transition-colors duration-200"
+      className="w-5 h-5 shrink-0 block transition-colors duration-200"
     >
       <rect
         x="2"
@@ -34,7 +36,7 @@ function IconFacebook() {
       viewBox="0 0 24 24"
       aria-hidden="true"
       focusable="false"
-      className="w-[1.2rem] h-[1.2rem] shrink-0 block transition-colors duration-200"
+      className="w-5 h-5 shrink-0 block transition-colors duration-200"
     >
       <path
         fill="none"
@@ -54,7 +56,7 @@ function IconLinkedIn() {
       viewBox="0 0 24 24"
       aria-hidden="true"
       focusable="false"
-      className="w-[1.2rem] h-[1.2rem] shrink-0 block transition-colors duration-200"
+      className="w-5 h-5 shrink-0 block transition-colors duration-200"
     >
       <rect
         x="2"
@@ -106,35 +108,35 @@ function IconLinkedIn() {
 }
 
 /**
- * Tapas Footer Component
- * Contains the Heartfulness network links and contact/social information.
- * Social links use inline SVG icons — no icon library.
+ * TAPAS Multi-Column Footer Component
+ * Left column: Logo, tagline, and "Join Us" CTA
+ * Quick Links column: Home, About, Team, Events, Gallery, Resources, Contact
+ * Heartfulness Network column: Daaji, Green Kanha, Shri Ram Chandra Mission, Spirituality Foundation
+ * Bottom bar: "TAPAS • Pillai College of Engineering, New Panvel" + copyright + social media links
  */
 export default function Footer() {
-  const networkLinks: NetworkLink[] = [
+  const quickLinks = [
+    { title: 'Home', url: '/' },
+    { title: 'About', url: '/#about' },
+    { title: 'Team', url: '/#team' },
+    { title: 'Events', url: '/#events' },
+    { title: 'Gallery', url: '/#gallery' },
+    { title: 'Resources', url: '/resources' },
+    { title: 'Contact', url: '/contact' },
+  ];
+
+  const heartfulnessNetwork: NetworkLink[] = [
     {
-      title: 'Daaji, the Global Guide of Heartfulness',
+      title: 'Daaji',
       url: 'https://www.daaji.org/',
-    },
-    {
-      title: 'Kanha Shanti Vanam',
-      url: 'https://kanha.sahajmarg.org/',
     },
     {
       title: 'Green Kanha',
       url: 'https://heartfulness.org/kanha/green-initiatives',
     },
     {
-      title: 'Sahaj Marg',
-      url: 'http://sahajmarg.org/',
-    },
-    {
       title: 'Shri Ram Chandra Mission',
       url: 'http://www.srcm.org/',
-    },
-    {
-      title: 'Gurugram Meditation Center',
-      url: 'https://heartfulness.org/gurugram/',
     },
     {
       title: 'Spirituality Foundation',
@@ -143,82 +145,130 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-tapas-soft border-t border-tapas-border pt-14 pb-10 mt-auto">
-      <div className="w-full max-w-[1200px] mx-auto px-5 md:px-8 grid grid-cols-1 md:grid-cols-[2fr_1fr] gap-10 md:gap-14">
-        {/* Heartfulness Network Section */}
-        <div>
-          <h2 className="text-[1.15rem] mb-4 text-tapas-text font-heading font-semibold">
-            Heartfulness network
-          </h2>
-          <ul className="list-none grid grid-cols-1 min-[600px]:grid-cols-2 gap-y-[0.6rem] min-[600px]:gap-x-6">
-            {networkLinks.map((item) => (
-              <li key={item.title}>
-                <a
-                  href={item.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-[0.92rem] text-tapas-muted inline-block transition-colors duration-200 hover:text-tapas-accent hover:underline"
-                >
-                  {item.title}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
+    <footer className="bg-tapas-soft border-t border-tapas-border pt-14 pb-8 mt-auto">
+      <div className="w-full max-w-[1200px] mx-auto px-5 md:px-8">
+        {/* Main Footer Multi-Column Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8 pb-12">
+          {/* Left Column: Brand & Tagline & CTA */}
+          <div className="md:col-span-5 flex flex-col items-start gap-4">
+            <Link href="/" className="inline-block">
+              <div className="relative h-[3rem] w-[150px]">
+                <Image
+                  src="/images/tapas-logo.png"
+                  alt="TAPAS Logo"
+                  fill
+                  className="object-contain object-left"
+                />
+              </div>
+            </Link>
+            <p className="text-[1.05rem] font-medium text-tapas-text leading-snug max-w-[22rem]">
+              Relax, Meditate, Rejuvenate and Connect
+            </p>
+            <p className="text-[0.92rem] text-tapas-muted leading-[1.6] max-w-[24rem]">
+              Emphasizing the mental well-being of students through guided Heartfulness meditation,
+              workshops, and holistic campus initiatives.
+            </p>
+            <div className="mt-2">
+              <Link
+                href="/join"
+                className="inline-flex items-center justify-center bg-tapas-accent text-white px-6 py-[0.65rem] rounded-[6px] text-[0.95rem] font-semibold transition-colors duration-200 hover:bg-tapas-accent-hover shadow-sm"
+              >
+                Join Us
+              </Link>
+            </div>
+          </div>
 
-        {/* Contact and Social Section */}
-        <div>
-          <h2 className="text-[1.15rem] mb-4 text-tapas-text font-heading font-semibold">
-            Contact and social
-          </h2>
-          <div className="flex flex-col gap-[0.65rem]">
-            <div className="text-[0.92rem] text-tapas-muted">
-              <span className="font-semibold text-tapas-text mr-[0.35rem]">Email:</span>
+          {/* Middle Column: Quick Links */}
+          <div className="md:col-span-3">
+            <h3 className="text-[1.1rem] mb-4 text-tapas-text font-heading font-semibold">
+              Quick Links
+            </h3>
+            <ul className="list-none flex flex-col gap-[0.55rem]">
+              {quickLinks.map((item) => (
+                <li key={item.title}>
+                  <Link
+                    href={item.url}
+                    className="text-[0.92rem] text-tapas-muted inline-block transition-colors duration-200 hover:text-tapas-accent hover:underline"
+                  >
+                    {item.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Right Column: Heartfulness Network & Contact */}
+          <div className="md:col-span-4 flex flex-col gap-6">
+            <div>
+              <h3 className="text-[1.1rem] mb-4 text-tapas-text font-heading font-semibold">
+                Heartfulness Network
+              </h3>
+              <ul className="list-none flex flex-col gap-[0.55rem]">
+                {heartfulnessNetwork.map((item) => (
+                  <li key={item.title}>
+                    <a
+                      href={item.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[0.92rem] text-tapas-muted inline-block transition-colors duration-200 hover:text-tapas-accent hover:underline"
+                    >
+                      {item.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="text-[0.92rem] font-semibold text-tapas-text mb-1">Get in Touch</h4>
               <a
                 href="mailto:tapas.pce@mes.ac.in"
-                className="text-tapas-muted transition-colors duration-200 hover:text-tapas-accent hover:underline"
+                className="text-[0.9rem] text-tapas-muted hover:text-tapas-accent transition-colors duration-200 underline"
               >
                 tapas.pce@mes.ac.in
               </a>
             </div>
-            <ul className="list-none flex flex-col gap-[0.6rem] mt-[0.35rem]">
-              <li>
-                <a
-                  href="https://www.instagram.com/tapas.pce"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-[0.55rem] text-[0.95rem] text-tapas-muted transition-colors duration-200 hover:text-tapas-accent"
-                  aria-label="TAPAS-PCE on Instagram"
-                >
-                  <IconInstagram />
-                  <span>Instagram</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.facebook.com/profile.php?id=100092632995551"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-[0.55rem] text-[0.95rem] text-tapas-muted transition-colors duration-200 hover:text-tapas-accent"
-                  aria-label="TAPAS-PCE on Facebook"
-                >
-                  <IconFacebook />
-                  <span>Facebook</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://www.linkedin.com/in/tapas-pce-ab809a1a9/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-[0.55rem] text-[0.95rem] text-tapas-muted transition-colors duration-200 hover:text-tapas-accent"
-                  aria-label="TAPAS-PCE on LinkedIn"
-                >
-                  <IconLinkedIn />
-                  <span>LinkedIn</span>
-                </a>
-              </li>
-            </ul>
+          </div>
+        </div>
+
+        {/* Bottom Bar: College, Copyright & Social Icons */}
+        <div className="border-t border-tapas-border pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+          <div className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 text-[0.88rem] text-tapas-muted">
+            <span className="font-semibold text-tapas-text">
+              TAPAS • Pillai College of Engineering, New Panvel
+            </span>
+            <span className="hidden sm:inline">•</span>
+            <span>&copy; {new Date().getFullYear()} All rights reserved.</span>
+          </div>
+
+          <div className="flex items-center gap-4 text-tapas-muted">
+            <a
+              href="https://www.instagram.com/tapas.pce"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-1.5 rounded-full transition-colors duration-200 hover:text-tapas-accent hover:bg-tapas-pastel"
+              aria-label="TAPAS on Instagram"
+            >
+              <IconInstagram />
+            </a>
+            <a
+              href="https://www.facebook.com/profile.php?id=100092632995551"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-1.5 rounded-full transition-colors duration-200 hover:text-tapas-accent hover:bg-tapas-pastel"
+              aria-label="TAPAS on Facebook"
+            >
+              <IconFacebook />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/tapas-pce-ab809a1a9/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-1.5 rounded-full transition-colors duration-200 hover:text-tapas-accent hover:bg-tapas-pastel"
+              aria-label="TAPAS on LinkedIn"
+            >
+              <IconLinkedIn />
+            </a>
           </div>
         </div>
       </div>
