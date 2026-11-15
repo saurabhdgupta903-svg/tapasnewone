@@ -6,10 +6,9 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 
 /**
- * TAPAS Navigation Bar
- * Features the TAPAS logo on the left, primary navigation links with active underline,
- * "Join Us" CTA button on the right, and a responsive hamburger menu for mobile devices.
- * Order: Home, About, Team, Events, Gallery, Resources, Join Us
+ * TAPAS Multi-page Navigation Bar
+ * Routes: Home (/), About (/about), Team (/team), Events (/events), Gallery (/gallery), Resources (/resources), Join Us (/join)
+ * Uses client-side routing with Next.js Link, active page highlighting, and responsive mobile menu.
  */
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -19,22 +18,23 @@ export default function Navbar() {
   const closeMenu = () => setMenuOpen(false);
 
   const navLinks = [
-    { name: 'Home', path: '/', pagePath: '/' },
-    { name: 'About', path: '/#about', pagePath: '/about' },
-    { name: 'Team', path: '/#team', pagePath: '/team' },
-    { name: 'Events', path: '/#events', pagePath: '/events' },
-    { name: 'Gallery', path: '/#gallery', pagePath: '/gallery' },
-    { name: 'Resources', path: '/resources', pagePath: '/resources' },
+    { name: 'Home', href: '/' },
+    { name: 'About', href: '/about' },
+    { name: 'Team', href: '/team' },
+    { name: 'Events', href: '/events' },
+    { name: 'Gallery', href: '/gallery' },
+    { name: 'Resources', href: '/resources' },
   ];
 
-  const isActive = (pagePath: string) => {
-    if (pagePath === '/') return pathname === '/';
-    return pathname.startsWith(pagePath);
+  const isActive = (href: string) => {
+    if (href === '/') return pathname === '/';
+    return pathname.startsWith(href);
   };
 
   return (
-    <header className="sticky top-0 z-[100] bg-tapas-soft border-b border-tapas-border w-full">
+    <header className="sticky top-0 z-[100] bg-tapas-soft border-b border-tapas-border w-full shadow-xs">
       <div className="w-full max-w-[1200px] mx-auto px-5 md:px-8 flex items-center justify-between h-[4.5rem] py-2">
+        {/* Brand Logo */}
         <Link href="/" className="flex items-center text-decoration-none" onClick={closeMenu}>
           <div className="relative h-[2.75rem] w-[140px]">
             <Image
@@ -51,11 +51,11 @@ export default function Navbar() {
         <nav className="hidden min-[992px]:block" aria-label="Main Navigation">
           <ul className="flex list-none gap-[1.75rem] items-center">
             {navLinks.map((item) => {
-              const active = isActive(item.pagePath);
+              const active = isActive(item.href);
               return (
                 <li key={item.name}>
                   <Link
-                    href={item.path}
+                    href={item.href}
                     className={`text-[0.95rem] font-medium pb-1 relative transition-colors duration-200 ${
                       active
                         ? 'text-tapas-accent underline underline-offset-[6px] decoration-2'
@@ -70,11 +70,11 @@ export default function Navbar() {
           </ul>
         </nav>
 
-        {/* Desktop Join Button */}
+        {/* Desktop Join CTA Button */}
         <div className="hidden min-[992px]:block">
           <Link
             href="/join"
-            className="inline-flex items-center justify-center bg-tapas-accent text-white px-5 py-[0.6rem] rounded-[6px] text-[0.95rem] font-semibold transition-colors duration-200 hover:bg-tapas-accent-hover"
+            className="inline-flex items-center justify-center bg-tapas-accent text-white px-5 py-[0.6rem] rounded-[6px] text-[0.95rem] font-semibold transition-colors duration-200 hover:bg-tapas-accent-hover shadow-sm"
           >
             Join Us
           </Link>
@@ -83,7 +83,7 @@ export default function Navbar() {
         {/* Hamburger Menu Toggle Button (Mobile) */}
         <button
           type="button"
-          className="flex flex-col justify-center items-center w-10 h-10 p-1 bg-transparent border border-tapas-border rounded-[6px] gap-[5px] min-[992px]:hidden"
+          className="flex flex-col justify-center items-center w-10 h-10 p-1 bg-transparent border border-tapas-border rounded-[6px] gap-[5px] min-[992px]:hidden cursor-pointer"
           onClick={toggleMenu}
           aria-expanded={menuOpen}
           aria-label="Toggle navigation menu"
@@ -111,11 +111,11 @@ export default function Navbar() {
         <div className="flex flex-col bg-tapas-soft border-t border-tapas-border px-6 pt-5 pb-8 gap-5 min-[992px]:hidden">
           <ul className="list-none flex flex-col gap-4">
             {navLinks.map((item) => {
-              const active = isActive(item.pagePath);
+              const active = isActive(item.href);
               return (
                 <li key={item.name}>
                   <Link
-                    href={item.path}
+                    href={item.href}
                     className={`text-[1.05rem] font-medium inline-block py-1 transition-colors duration-200 ${
                       active
                         ? 'text-tapas-accent underline underline-offset-[6px] decoration-2'
@@ -132,7 +132,7 @@ export default function Navbar() {
           <div className="mt-2">
             <Link
               href="/join"
-              className="block text-center bg-tapas-accent text-white px-5 py-3 rounded-[6px] font-semibold transition-colors duration-200 hover:bg-tapas-accent-hover"
+              className="block text-center bg-tapas-accent text-white px-5 py-3 rounded-[6px] font-semibold transition-colors duration-200 hover:bg-tapas-accent-hover shadow-sm"
               onClick={closeMenu}
             >
               Join Us

@@ -3,23 +3,29 @@ export interface StatProps {
   label: string;
 }
 
-export interface EventItem {
-  id: string;
-  img: string;
-  title: string;
-  date: string;
-}
-
 export interface AwardItem {
   id: string;
   title: string;
+  description: string;
   img: string;
   badge?: string;
+  datePlace?: string;
 }
 
 export interface EventStatItem {
   event: string;
-  students: string;
+  targetNum: number;
+  suffix?: string;
+  displayNum: string;
+}
+
+export interface EventItem {
+  id: string;
+  img: string;
+  title: string;
+  stat?: string;
+  desc?: string;
+  date?: string;
 }
 
 export interface TestimonialItem {
@@ -35,7 +41,8 @@ export interface NetworkLink {
 
 export interface NavLinkItem {
   name: string;
-  path: string;
+  href: string;
+  sectionId: string;
 }
 
 export interface LoaderProps {

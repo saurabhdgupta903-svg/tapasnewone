@@ -2,7 +2,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { NetworkLink } from '@/types';
 
-/* ── Inline SVG icons ── no icon library needed ── */
 function IconInstagram() {
   return (
     <svg
@@ -107,27 +106,20 @@ function IconLinkedIn() {
   );
 }
 
-/**
- * TAPAS Multi-Column Footer Component
- * Left column: Logo, tagline, and "Join Us" CTA
- * Quick Links column: Home, About, Team, Events, Gallery, Resources, Contact
- * Heartfulness Network column: Daaji, Green Kanha, Shri Ram Chandra Mission, Spirituality Foundation
- * Bottom bar: "TAPAS • Pillai College of Engineering, New Panvel" + copyright + social media links
- */
 export default function Footer() {
-  const quickLinks = [
-    { title: 'Home', url: '/' },
-    { title: 'About', url: '/#about' },
-    { title: 'Team', url: '/#team' },
-    { title: 'Events', url: '/#events' },
-    { title: 'Gallery', url: '/#gallery' },
-    { title: 'Resources', url: '/resources' },
-    { title: 'Contact', url: '/contact' },
+  const pageLinks = [
+    { title: 'Home', href: '/' },
+    { title: 'About', href: '/about' },
+    { title: 'Team', href: '/team' },
+    { title: 'Events', href: '/events' },
+    { title: 'Gallery', href: '/gallery' },
+    { title: 'Resources', href: '/resources' },
+    { title: 'Join Us', href: '/join' },
   ];
 
   const heartfulnessNetwork: NetworkLink[] = [
     {
-      title: 'Daaji',
+      title: 'Daaji, the Global Guide of Heartfulness',
       url: 'https://www.daaji.org/',
     },
     {
@@ -147,11 +139,10 @@ export default function Footer() {
   return (
     <footer className="bg-tapas-soft border-t border-tapas-border pt-14 pb-8 mt-auto">
       <div className="w-full max-w-[1200px] mx-auto px-5 md:px-8">
-        {/* Main Footer Multi-Column Grid */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8 pb-12">
-          {/* Left Column: Brand & Tagline & CTA */}
+          {/* Left Column */}
           <div className="md:col-span-5 flex flex-col items-start gap-4">
-            <Link href="/" className="inline-block">
+            <Link href="/" className="inline-block" aria-label="TAPAS Home">
               <div className="relative h-[3rem] w-[150px]">
                 <Image
                   src="/images/tapas-logo.png"
@@ -178,16 +169,16 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Middle Column: Quick Links */}
+          {/* Middle Column: Pages Navigation Links */}
           <div className="md:col-span-3">
             <h3 className="text-[1.1rem] mb-4 text-tapas-text font-heading font-semibold">
-              Quick Links
+              Pages
             </h3>
             <ul className="list-none flex flex-col gap-[0.55rem]">
-              {quickLinks.map((item) => (
+              {pageLinks.map((item) => (
                 <li key={item.title}>
                   <Link
-                    href={item.url}
+                    href={item.href}
                     className="text-[0.92rem] text-tapas-muted inline-block transition-colors duration-200 hover:text-tapas-accent hover:underline"
                   >
                     {item.title}
@@ -197,7 +188,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Right Column: Heartfulness Network & Contact */}
+          {/* Right Column: Heartfulness Network */}
           <div className="md:col-span-4 flex flex-col gap-6">
             <div>
               <h3 className="text-[1.1rem] mb-4 text-tapas-text font-heading font-semibold">
@@ -212,7 +203,7 @@ export default function Footer() {
                       rel="noopener noreferrer"
                       className="text-[0.92rem] text-tapas-muted inline-block transition-colors duration-200 hover:text-tapas-accent hover:underline"
                     >
-                      {item.title}
+                      {item.title} &rarr;
                     </a>
                   </li>
                 ))}
@@ -231,7 +222,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom Bar: College, Copyright & Social Icons */}
+        {/* Bottom Bar */}
         <div className="border-t border-tapas-border pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
           <div className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 text-[0.88rem] text-tapas-muted">
             <span className="font-semibold text-tapas-text">

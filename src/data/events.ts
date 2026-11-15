@@ -1,123 +1,79 @@
-import { EventItem, AwardItem, EventStatItem } from '@/types';
+import { EventStatItem, EventItem } from '@/types';
 
-export const awards: AwardItem[] = [
+export interface SlideshowEventItem {
+  id: string;
+  name: string;
+  img: string;
+  description: string;
+}
+
+export const slideshowEvents: SlideshowEventItem[] = [
   {
-    id: 'naac-recognition',
-    title:
-      'NAAC recognized our wellness initiatives, helping Pillai College secure an "A" Grade accreditation',
-    img: '/images/events/naac-recognition.jpg',
-    badge: 'NAAC "A" Grade',
+    id: 'dhyanotsav',
+    name: 'Dhyanotsav',
+    img: '/images/events/dhyanotsav-auditorium.jpg',
+    description:
+      'Annual flagship meditation gathering organized by TAPAS, bringing over 2,000 students and faculty together in the college auditorium for guided Heartfulness meditation, relaxation, and wellness sessions.',
   },
   {
-    id: 'centre-of-excellence',
-    title: 'Recognized as a Centre of Excellence in Pillai HOC Campus',
-    img: '/images/events/centre-of-excellence.jpg',
-    badge: 'Centre of Excellence',
+    id: 'wellness-fest',
+    name: 'Wellness Fest',
+    img: '/images/events/stage-gathering.jpg',
+    description:
+      'Campus-wide youth wellness festival impacting over 8,000 students with practical mental health workshops, stress relief techniques, and interactive wellness initiatives.',
   },
   {
-    id: 'youth-ambassador-award',
-    title: 'Honored with the Heartful Youth Ambassador Award',
-    img: '/images/events/youth-ambassador-award.jpg',
-    badge: 'Youth Ambassador',
+    id: 'kanha-visit',
+    name: 'Kanha Visit',
+    img: '/images/events/kanha-visit.jpg',
+    description:
+      "Annual retreat and educational tour taking over 500 students to Kanha Shanti Vanam, Hyderabad, to experience meditation under the world's largest meditation dome.",
   },
   {
-    id: 'best-heartful-campus',
-    title: 'Best Heartful Campus Award',
-    img: '/images/events/best-heartful-campus.jpg',
-    badge: 'Best Campus Award',
+    id: 'yog-mahotsav',
+    name: 'Yog Mahotsav',
+    img: '/images/events/yoga-with-youth.jpg',
+    description:
+      'Extensive yoga and meditation sessions engaging over 1,000 students, celebrating International Yoga Day with nationwide youth initiatives felicitated by the Ministry of AYUSH.',
   },
   {
-    id: 'ayush-minister-felicitation',
-    title:
-      "Felicitated by the Hon'ble Union Minister of State for AYUSH, Shri Prataprao Jadhav, for our contribution to Yoga with Youth",
-    img: '/images/events/ayush-minister-felicitation.jpg',
-    badge: 'Ministry of AYUSH',
+    id: 'weekly-meditation',
+    name: 'Weekly Meditation',
+    img: '/images/events/yoga-session.jpg',
+    description:
+      'Regular guided meditation circles and relaxation sessions conducted on campus, helping more than 700 students de-stress and cultivate inner balance.',
+  },
+  {
+    id: 'dhyanratri',
+    name: 'Dhyanratri',
+    img: '/images/events/team-auditorium.jpg',
+    description:
+      'An evening of dedicated quiet reflection and meditation for more than 500 students, fostering deep relaxation and inner calm during intensive semesters.',
+  },
+  {
+    id: '21-days-meditation',
+    name: '21 Days Meditation',
+    img: '/images/events/book-distribution.jpg',
+    description:
+      "A structured 21-day campus wellness program guiding over 1,000 students through daily meditation practices and distribution of 'The Heartfulness Way'.",
+  },
+  {
+    id: 'ashram-events',
+    name: 'Ashram Events',
+    img: '/images/events/kanha-dome.jpg',
+    description:
+      'Immersive spiritual retreats and experiential learning workshops connecting over 1,000 students with certified Heartfulness trainers.',
   },
 ];
 
 export const eventStatistics: EventStatItem[] = [
-  { event: 'Wellness Fest', students: '8000+' },
-  { event: 'Dhyanotsav', students: '2000+ every year' },
-  { event: 'Dhyanratri', students: '500+' },
-  { event: '21 Days Meditation', students: '1000+' },
-  { event: 'Ashram Events', students: '1000+' },
-  { event: 'Weekly Meditation', students: '700+' },
-  { event: 'Sunday Meditations', students: '500+' },
-  { event: 'Yog Mahotsav', students: '1000+' },
-  { event: 'Kanha Visit', students: '500+ every year' },
-];
-
-export const galleryEvents: EventItem[] = [
-  {
-    id: 'formation-2019',
-    img: '/images/events/formation-2019.jpg',
-    title: 'Formation of TAPAS — 16 October 2019',
-    date: 'October 2019',
-  },
-  {
-    id: 'ayush-minister-felicitation',
-    img: '/images/events/ayush-minister-felicitation.jpg',
-    title: 'Yoga with Youth Felicitation by AYUSH Minister',
-    date: 'International Yoga Day',
-  },
-  {
-    id: 'book-distribution',
-    img: '/images/events/book-distribution.jpg',
-    title: '"The Heartfulness Way" Book Distribution',
-    date: 'Campus Initiative',
-  },
-  {
-    id: 'kanha-visit',
-    img: '/images/events/kanha-visit.jpg',
-    title: 'Kanha Shanti Vanam Visit',
-    date: 'Annual Retreat',
-  },
-  {
-    id: 'dhyanotsav-auditorium',
-    img: '/images/events/dhyanotsav-auditorium.jpg',
-    title: 'Dhyanotsav Meditation Celebration',
-    date: 'Campus Auditorium',
-  },
-  {
-    id: 'centre-of-excellence',
-    img: '/images/events/centre-of-excellence.jpg',
-    title: 'Centre of Excellence Recognition',
-    date: 'Pillai HOC Campus',
-  },
-  {
-    id: 'naac-recognition',
-    img: '/images/events/naac-recognition.jpg',
-    title: 'NAAC Peer Team Accreditation Recognition',
-    date: 'Academic Honor',
-  },
-  {
-    id: 'youth-ambassador-award',
-    img: '/images/events/youth-ambassador-award.jpg',
-    title: 'Heartful Youth Ambassador Award Ceremony',
-    date: 'Youth Leadership',
-  },
-  {
-    id: 'best-heartful-campus',
-    img: '/images/events/best-heartful-campus.jpg',
-    title: 'Best Heartful Campus Award',
-    date: 'Excellence Award',
-  },
-  {
-    id: 'kanha-dome',
-    img: '/images/events/kanha-dome.jpg',
-    title: 'Heartfulness Meditation Dome, Kanha',
-    date: 'Spiritual Retreat',
-  },
-  {
-    id: 'yoga-session',
-    img: '/images/events/yoga-session.jpg',
-    title: 'Heartfulness Yoga & Meditation Session',
-    date: 'Wellness Workshop',
-  },
-  {
-    id: 'team-auditorium',
-    img: '/images/events/team-auditorium.jpg',
-    title: 'TAPAS Student & Volunteer Team',
-    date: 'Campus Gathering',
-  },
+  { event: 'Wellness Fest', targetNum: 8000, displayNum: '8000+' },
+  { event: 'Dhyanotsav', targetNum: 2000, suffix: 'every year', displayNum: '2000+' },
+  { event: 'Dhyanratri', targetNum: 500, displayNum: '500+' },
+  { event: '21 Days Meditation', targetNum: 1000, displayNum: '1000+' },
+  { event: 'Ashram Events', targetNum: 1000, displayNum: '1000+' },
+  { event: 'Weekly Meditation', targetNum: 700, displayNum: '700+' },
+  { event: 'Sunday Meditations', targetNum: 500, displayNum: '500+' },
+  { event: 'Yog Mahotsav', targetNum: 1000, displayNum: '1000+' },
+  { event: 'Kanha Visit', targetNum: 500, suffix: 'every year', displayNum: '500+' },
 ];
