@@ -106,6 +106,34 @@ function IconLinkedIn() {
   );
 }
 
+function IconYouTube() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+      focusable="false"
+      className="w-5 h-5 shrink-0 block transition-colors duration-200"
+    >
+      <rect
+        x="2"
+        y="5"
+        width="20"
+        height="14"
+        rx="4"
+        ry="4"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+      />
+      <polygon
+        points="10,8.5 10,15.5 16,12"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
 export default function Footer() {
   const pageLinks = [
     { title: 'Home', href: '/' },
@@ -132,7 +160,7 @@ export default function Footer() {
     },
     {
       title: 'Spirituality Foundation',
-      url: 'https://www.spiritualityfoundation.org/',
+      url: 'https://youtu.be/gDClb-yjNdQ?si=xFS-GZAxm7IByxzk',
     },
   ];
 
@@ -153,7 +181,7 @@ export default function Footer() {
               </div>
             </Link>
             <p className="text-[1.05rem] font-medium text-tapas-text leading-snug max-w-[22rem]">
-              Relax, Meditate, Rejuvenate and Connect
+              RELAX&nbsp;•&nbsp;MEDITATE&nbsp;•&nbsp;REJUVENATE&nbsp;•&nbsp;CONNECT
             </p>
             <p className="text-[0.92rem] text-tapas-muted leading-[1.6] max-w-[24rem]">
               Emphasizing the mental well-being of students through guided Heartfulness meditation,
@@ -218,6 +246,12 @@ export default function Footer() {
               >
                 tapas.pce@mes.ac.in
               </a>
+              <a
+                href="tel:+919324281653"
+                className="text-[0.9rem] text-tapas-muted hover:text-tapas-accent transition-colors duration-200 underline block mt-1"
+              >
+                93242 81653
+              </a>
             </div>
           </div>
         </div>
@@ -226,7 +260,7 @@ export default function Footer() {
         <div className="border-t border-tapas-border pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
           <div className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 text-[0.88rem] text-tapas-muted">
             <span className="font-semibold text-tapas-text">
-              TAPAS • Pillai College of Engineering, New Panvel
+              TAPAS • Pillai University, New Panvel
             </span>
             <span className="hidden sm:inline">•</span>
             <span>&copy; {new Date().getFullYear()} All rights reserved.</span>

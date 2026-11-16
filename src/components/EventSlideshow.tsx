@@ -13,6 +13,7 @@ export default function EventSlideshow({ events }: EventSlideshowProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<SlideshowEventItem | null>(null);
+  const [galleryIndex, setGalleryIndex] = useState(0);
 
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
@@ -28,7 +29,7 @@ export default function EventSlideshow({ events }: EventSlideshowProps) {
     setCurrentIndex((prev) => (prev - 1 + total) % total);
   }, [total]);
 
-  // Automatic slideshow on page load every 3.5 seconds
+  // Automatic slideshow on page load every 4 seconds
   useEffect(() => {
     if (isPaused || selectedEvent !== null) return;
 
@@ -38,7 +39,7 @@ export default function EventSlideshow({ events }: EventSlideshowProps) {
 
     const interval = setInterval(() => {
       nextSlide();
-    }, 3500);
+    }, 4000);
 
     return () => clearInterval(interval);
   }, [isPaused, selectedEvent, nextSlide]);
@@ -66,6 +67,12 @@ export default function EventSlideshow({ events }: EventSlideshowProps) {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!selectedEvent) return;
       if (e.key === 'Escape') setSelectedEvent(null);
+      if (e.key === 'ArrowLeft' && selectedEvent.photos.length > 1) {
+        setGalleryIndex((prev) => (prev - 1 + selectedEvent.photos.length) % selectedEvent.photos.length);
+      }
+      if (e.key === 'ArrowRight' && selectedEvent.photos.length > 1) {
+        setGalleryIndex((prev) => (prev + 1) % selectedEvent.photos.length);
+      }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
@@ -77,6 +84,11 @@ export default function EventSlideshow({ events }: EventSlideshowProps) {
       modalCloseRef.current.focus();
     }
   }, [selectedEvent]);
+
+  const openModal = (ev: SlideshowEventItem) => {
+    setSelectedEvent(ev);
+    setGalleryIndex(0);
+  };
 
   const currentEvent = events[currentIndex];
 
@@ -107,14 +119,14 @@ export default function EventSlideshow({ events }: EventSlideshowProps) {
         >
           {/* Main Slide Card */}
           <div
-            onClick={() => setSelectedEvent(currentEvent)}
+            onClick={() => openModal(currentEvent)}
             className="cursor-pointer relative aspect-[16/9] sm:aspect-[21/10] w-full bg-tapas-pastel overflow-hidden"
             role="button"
             tabIndex={0}
             onKeyDown={(e) => {
               if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
-                setSelectedEvent(currentEvent);
+                openModal(currentEvent);
               }
             }}
             aria-label={`View details for event: ${currentEvent.name}`}
@@ -125,12 +137,13 @@ export default function EventSlideshow({ events }: EventSlideshowProps) {
               fill
               priority={currentIndex === 0}
               loading={currentIndex === 0 ? 'eager' : 'lazy'}
+              decoding="async"
               sizes="(max-width: 1024px) 100vw, 1024px"
               className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
             />
 
             {/* Event Name Caption Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent flex flex-col justify-end p-6 sm:p-10">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-6 sm:p-10">
               <span className="text-xs uppercase font-bold tracking-widest text-white/80 mb-1.5">
                 TAPAS Event ({currentIndex + 1} of {total})
               </span>
@@ -138,7 +151,7 @@ export default function EventSlideshow({ events }: EventSlideshowProps) {
                 {currentEvent.name}
               </h3>
               <p className="text-xs sm:text-sm text-white/90 mt-2 font-medium flex items-center gap-1.5">
-                <span>Click slide to view event details</span>
+                <span>Click slide to view event details &amp; gallery</span>
                 <span>&rarr;</span>
               </p>
             </div>
@@ -189,7 +202,7 @@ export default function EventSlideshow({ events }: EventSlideshowProps) {
         </div>
       </div>
 
-      {/* Event Details Modal */}
+      {/* Event Details Modal with Photo Gallery */}
       {selectedEvent !== null && (
         <div
           role="dialog"
@@ -207,31 +220,78 @@ export default function EventSlideshow({ events }: EventSlideshowProps) {
               ref={modalCloseRef}
               type="button"
               onClick={() => setSelectedEvent(null)}
-              className="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-black/80 transition-colors border-0 cursor-pointer"
+              className="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-black/65 text-white flex items-center justify-center hover:bg-black/85 transition-colors border-0 cursor-pointer shadow"
               aria-label="Close event modal"
             >
               &#10005;
             </button>
 
-            {/* Large Event Image */}
+            {/* Gallery Photo Viewport */}
             <div className="relative w-full aspect-[16/10] bg-tapas-pastel shrink-0">
               <Image
-                src={selectedEvent.img}
-                alt={selectedEvent.name}
+                src={selectedEvent.photos[galleryIndex]}
+                alt={`${selectedEvent.name} photo ${galleryIndex + 1}`}
                 fill
                 priority
+                decoding="async"
                 className="object-cover"
               />
+
+              {/* Gallery navigation if multiple photos */}
+              {selectedEvent.photos.length > 1 && (
+                <>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setGalleryIndex((prev) => (prev - 1 + selectedEvent.photos.length) % selectedEvent.photos.length);
+                    }}
+                    className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/55 text-white flex items-center justify-center hover:bg-black/80 transition-colors border-0 cursor-pointer shadow"
+                    aria-label="Previous photo"
+                  >
+                    &#8249;
+                  </button>
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setGalleryIndex((prev) => (prev + 1) % selectedEvent.photos.length);
+                    }}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/55 text-white flex items-center justify-center hover:bg-black/80 transition-colors border-0 cursor-pointer shadow"
+                    aria-label="Next photo"
+                  >
+                    &#8250;
+                  </button>
+                  <div className="absolute bottom-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-black/60 text-white text-xs font-semibold">
+                    {galleryIndex + 1} / {selectedEvent.photos.length}
+                  </div>
+                </>
+              )}
             </div>
 
             {/* Modal Body */}
             <div className="p-6 sm:p-8 overflow-y-auto flex flex-col gap-4">
-              <h3
-                id="event-modal-title"
-                className="font-heading text-2xl font-semibold text-tapas-text leading-snug"
-              >
-                {selectedEvent.name}
-              </h3>
+              <div className="flex flex-col gap-1.5">
+                <h3
+                  id="event-modal-title"
+                  className="font-heading text-2xl font-semibold text-tapas-text leading-snug"
+                >
+                  {selectedEvent.name}
+                </h3>
+                <div className="flex flex-wrap items-center gap-2 pt-1">
+                  {selectedEvent.date && (
+                    <span className="inline-flex items-center text-xs font-semibold px-2.5 py-1 rounded-full bg-tapas-pastel text-tapas-accent">
+                      📅 {selectedEvent.date}
+                    </span>
+                  )}
+                  {selectedEvent.students && (
+                    <span className="inline-flex items-center text-xs font-semibold px-2.5 py-1 rounded-full bg-tapas-pastel text-tapas-accent">
+                      👥 {selectedEvent.students}
+                    </span>
+                  )}
+                </div>
+              </div>
+
               <p className="text-sm sm:text-base text-tapas-muted leading-relaxed">
                 {selectedEvent.description}
               </p>

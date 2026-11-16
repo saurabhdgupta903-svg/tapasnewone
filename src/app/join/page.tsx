@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Join Us | TAPAS',
-  description: 'Join TAPAS — Heartfulness Meditation and Wellness Club at Pillai College of Engineering.',
+  description: 'Join TAPAS — Heartfulness Meditation and Wellness Club at Pillai University.',
 };
 
 export default function JoinPage() {

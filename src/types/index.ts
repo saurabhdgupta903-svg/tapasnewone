@@ -32,6 +32,8 @@ export interface TestimonialItem {
   text: string;
   name: string;
   role: string;
+  photo: string;
+  isPortrait?: boolean;
 }
 
 export interface NetworkLink {

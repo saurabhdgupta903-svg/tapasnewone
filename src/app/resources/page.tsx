@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Resources | TAPAS',
-  description: 'Heartfulness meditation and wellness resources at Pillai College of Engineering.',
+  description: 'Heartfulness meditation and wellness resources at Pillai University.',
 };
 
 export default function ResourcesPage() {

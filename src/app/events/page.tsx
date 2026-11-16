@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Events | TAPAS',
-  description: 'Events and sessions of TAPAS at Pillai College of Engineering.',
+  description: 'Events and sessions of TAPAS at Pillai University.',
 };
 
 export default function EventsPage() {

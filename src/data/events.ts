@@ -1,68 +1,43 @@
-import { EventStatItem, EventItem } from '@/types';
+import { EventStatItem } from '@/types';
 
 export interface SlideshowEventItem {
   id: string;
   name: string;
-  img: string;
+  img: string; // cover image
+  photos: string[]; // all matched photos of that event for the modal gallery
+  date?: string;
+  students?: string;
   description: string;
 }
 
 export const slideshowEvents: SlideshowEventItem[] = [
   {
-    id: 'dhyanotsav',
-    name: 'Dhyanotsav',
-    img: '/images/events/dhyanotsav-auditorium.jpg',
+    id: 'yoga-with-youth',
+    name: 'Yoga with Youth 2026',
+    img: '/images/events/Picture8.jpg',
+    photos: ['/images/events/Picture8.jpg', '/images/events/Picture4.jpg'],
+    date: '18 June 2026',
+    students: '800 students',
     description:
-      'Annual flagship meditation gathering organized by TAPAS, bringing over 2,000 students and faculty together in the college auditorium for guided Heartfulness meditation, relaxation, and wellness sessions.',
-  },
-  {
-    id: 'wellness-fest',
-    name: 'Wellness Fest',
-    img: '/images/events/stage-gathering.jpg',
-    description:
-      'Campus-wide youth wellness festival impacting over 8,000 students with practical mental health workshops, stress relief techniques, and interactive wellness initiatives.',
+      'Organized at the iconic Gateway of India, Mumbai, as the 3rd Official Countdown Event to International Day of Yoga 2026 under the Ministry of AYUSH, Government of India, in collaboration with Heartfulness Institute and Morarji Desai National Institute of Yoga (MDNIY). Centered on the theme "Wellness. Awareness. Action.", the program guided 800 students through yoga and wellness practices.',
   },
   {
     id: 'kanha-visit',
-    name: 'Kanha Visit',
-    img: '/images/events/kanha-visit.jpg',
+    name: 'Kanha Shanti Vanam / Kanha Visit',
+    img: '/images/events/Picture2.jpg',
+    photos: ['/images/events/Picture2.jpg'],
+    students: '700 students',
     description:
-      "Annual retreat and educational tour taking over 500 students to Kanha Shanti Vanam, Hyderabad, to experience meditation under the world's largest meditation dome.",
+      "National Youth Sangam retreat taking 700 students to Kanha Shanti Vanam, Hyderabad. Participants experienced meditation inside the world's largest meditation dome, alongside guided group relaxation and interactive sessions.",
   },
   {
-    id: 'yog-mahotsav',
-    name: 'Yog Mahotsav',
-    img: '/images/events/yoga-with-youth.jpg',
+    id: 'dhyanotsav',
+    name: 'Dhyanotsav',
+    img: '/images/events/Picture3.jpg',
+    photos: ['/images/events/Picture3.jpg'],
+    students: '2022 (900 students), 2023 (1000 students), 2024 (1200 students)',
     description:
-      'Extensive yoga and meditation sessions engaging over 1,000 students, celebrating International Yoga Day with nationwide youth initiatives felicitated by the Ministry of AYUSH.',
-  },
-  {
-    id: 'weekly-meditation',
-    name: 'Weekly Meditation',
-    img: '/images/events/yoga-session.jpg',
-    description:
-      'Regular guided meditation circles and relaxation sessions conducted on campus, helping more than 700 students de-stress and cultivate inner balance.',
-  },
-  {
-    id: 'dhyanratri',
-    name: 'Dhyanratri',
-    img: '/images/events/team-auditorium.jpg',
-    description:
-      'An evening of dedicated quiet reflection and meditation for more than 500 students, fostering deep relaxation and inner calm during intensive semesters.',
-  },
-  {
-    id: '21-days-meditation',
-    name: '21 Days Meditation',
-    img: '/images/events/book-distribution.jpg',
-    description:
-      "A structured 21-day campus wellness program guiding over 1,000 students through daily meditation practices and distribution of 'The Heartfulness Way'.",
-  },
-  {
-    id: 'ashram-events',
-    name: 'Ashram Events',
-    img: '/images/events/kanha-dome.jpg',
-    description:
-      'Immersive spiritual retreats and experiential learning workshops connecting over 1,000 students with certified Heartfulness trainers.',
+      'A flagship campus meditation event that introduces Heartfulness meditation practices to students, helping them slow down, manage academic pressures, and reconnect with themselves.',
   },
 ];
 

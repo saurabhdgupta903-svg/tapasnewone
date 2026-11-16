@@ -83,3 +83,13 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ── Marquee scroll animation ─────────────────────────── */
+@keyframes tapas-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.tapas-marquee-track {
+  animation: tapas-scroll 28s linear infinite;
+}

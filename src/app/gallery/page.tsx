@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Gallery | TAPAS',
-  description: 'Photo gallery of TAPAS at Pillai College of Engineering.',
+  description: 'Photo gallery of TAPAS at Pillai University.',
 };
 
 export default function GalleryPage() {

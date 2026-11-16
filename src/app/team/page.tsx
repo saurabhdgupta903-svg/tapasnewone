@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Team | TAPAS',
-  description: 'Team of TAPAS — Heartfulness Meditation and Wellness Club at Pillai College of Engineering.',
+  description: 'Team of TAPAS — Heartfulness Meditation and Wellness Club at Pillai University.',
 };
 
 export default function TeamPage() {
