@@ -33,7 +33,6 @@ export default function EventSlideshow({ events }: EventSlideshowProps) {
   useEffect(() => {
     if (isPaused || selectedEvent !== null) return;
 
-    // Check if user prefers reduced motion
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) return;
 
@@ -56,8 +55,8 @@ export default function EventSlideshow({ events }: EventSlideshowProps) {
   const handleTouchEnd = () => {
     if (touchStartX.current === null || touchEndX.current === null) return;
     const diff = touchStartX.current - touchEndX.current;
-    if (diff > 50) nextSlide();
-    else if (diff < -50) prevSlide();
+    if (diff > 40) nextSlide();
+    else if (diff < -40) prevSlide();
     touchStartX.current = null;
     touchEndX.current = null;
   };
@@ -95,7 +94,7 @@ export default function EventSlideshow({ events }: EventSlideshowProps) {
   return (
     <div className="w-full">
       {/* Section Header */}
-      <div className="text-center max-w-[800px] mx-auto mb-8">
+      <div className="text-center max-w-[800px] mx-auto mb-6 sm:mb-8 px-1">
         <span className="text-xs font-bold uppercase tracking-[0.14em] text-tapas-accent mb-2 block">
           Campus Glimpses
         </span>
@@ -110,7 +109,7 @@ export default function EventSlideshow({ events }: EventSlideshowProps) {
       {/* Large Full-width Slideshow Container */}
       <div className="relative w-full max-w-5xl mx-auto">
         <div
-          className="relative bg-tapas-soft border border-tapas-border rounded-[18px] overflow-hidden shadow-sm group select-none"
+          className="relative bg-tapas-soft border border-tapas-border rounded-[14px] sm:rounded-[18px] overflow-hidden shadow-sm group select-none"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
           onTouchStart={handleTouchStart}
@@ -120,7 +119,7 @@ export default function EventSlideshow({ events }: EventSlideshowProps) {
           {/* Main Slide Card */}
           <div
             onClick={() => openModal(currentEvent)}
-            className="cursor-pointer relative aspect-[16/9] sm:aspect-[21/10] w-full bg-tapas-pastel overflow-hidden"
+            className="cursor-pointer relative aspect-[16/11] sm:aspect-[21/10] w-full bg-tapas-pastel overflow-hidden"
             role="button"
             tabIndex={0}
             onKeyDown={(e) => {
@@ -138,20 +137,20 @@ export default function EventSlideshow({ events }: EventSlideshowProps) {
               priority={currentIndex === 0}
               loading={currentIndex === 0 ? 'eager' : 'lazy'}
               decoding="async"
-              sizes="(max-width: 1024px) 100vw, 1024px"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 1024px"
               className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
             />
 
             {/* Event Name Caption Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-6 sm:p-10">
-              <span className="text-xs uppercase font-bold tracking-widest text-white/80 mb-1.5">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent flex flex-col justify-end p-4 sm:p-8 md:p-10">
+              <span className="text-[0.7rem] sm:text-xs uppercase font-bold tracking-widest text-white/80 mb-1">
                 TAPAS Event ({currentIndex + 1} of {total})
               </span>
-              <h3 className="font-heading text-xl sm:text-3xl font-semibold text-white leading-snug">
+              <h3 className="font-heading text-base sm:text-2xl md:text-3xl font-semibold text-white leading-snug">
                 {currentEvent.name}
               </h3>
-              <p className="text-xs sm:text-sm text-white/90 mt-2 font-medium flex items-center gap-1.5">
-                <span>Click slide to view event details &amp; gallery</span>
+              <p className="text-[0.75rem] sm:text-xs text-white/90 mt-1.5 sm:mt-2 font-medium flex items-center gap-1.5">
+                <span>Tap to view event details &amp; gallery</span>
                 <span>&rarr;</span>
               </p>
             </div>
@@ -164,7 +163,7 @@ export default function EventSlideshow({ events }: EventSlideshowProps) {
               e.stopPropagation();
               prevSlide();
             }}
-            className="absolute left-3.5 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/45 text-white flex items-center justify-center hover:bg-black/75 transition-colors border-0 cursor-pointer shadow"
+            className="absolute left-2 sm:left-3.5 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-black/75 transition-colors border-0 cursor-pointer shadow z-10"
             aria-label="Previous slide"
           >
             &#8249;
@@ -177,7 +176,7 @@ export default function EventSlideshow({ events }: EventSlideshowProps) {
               e.stopPropagation();
               nextSlide();
             }}
-            className="absolute right-3.5 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/45 text-white flex items-center justify-center hover:bg-black/75 transition-colors border-0 cursor-pointer shadow"
+            className="absolute right-2 sm:right-3.5 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-black/75 transition-colors border-0 cursor-pointer shadow z-10"
             aria-label="Next slide"
           >
             &#8250;
@@ -185,7 +184,7 @@ export default function EventSlideshow({ events }: EventSlideshowProps) {
         </div>
 
         {/* Dot Indicators */}
-        <div className="flex justify-center items-center gap-2 mt-5">
+        <div className="flex justify-center items-center gap-2 mt-4 sm:mt-5">
           {events.map((ev, idx) => (
             <button
               key={ev.id}
@@ -193,8 +192,8 @@ export default function EventSlideshow({ events }: EventSlideshowProps) {
               onClick={() => setCurrentIndex(idx)}
               className={`transition-all duration-300 rounded-full border-0 cursor-pointer p-0 ${
                 idx === currentIndex
-                  ? 'w-7 h-2.5 bg-tapas-accent'
-                  : 'w-2.5 h-2.5 bg-tapas-border hover:bg-tapas-muted'
+                  ? 'w-6 sm:w-7 h-2 sm:h-2.5 bg-tapas-accent'
+                  : 'w-2 sm:w-2.5 h-2 sm:h-2.5 bg-tapas-border hover:bg-tapas-muted'
               }`}
               aria-label={`Go to slide ${idx + 1}: ${ev.name}`}
             />
@@ -208,11 +207,11 @@ export default function EventSlideshow({ events }: EventSlideshowProps) {
           role="dialog"
           aria-modal="true"
           aria-labelledby="event-modal-title"
-          className="fixed inset-0 z-[1000] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 md:p-6"
+          className="fixed inset-0 z-[1000] bg-black/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6"
           onClick={() => setSelectedEvent(null)}
         >
           <div
-            className="relative max-w-2xl w-full bg-tapas-soft rounded-[18px] overflow-hidden shadow-2xl border border-tapas-border flex flex-col max-h-[90vh]"
+            className="relative max-w-2xl w-full bg-tapas-soft rounded-[14px] sm:rounded-[18px] overflow-hidden shadow-2xl border border-tapas-border flex flex-col max-h-[90vh]"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
@@ -220,14 +219,14 @@ export default function EventSlideshow({ events }: EventSlideshowProps) {
               ref={modalCloseRef}
               type="button"
               onClick={() => setSelectedEvent(null)}
-              className="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-black/65 text-white flex items-center justify-center hover:bg-black/85 transition-colors border-0 cursor-pointer shadow"
+              className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 w-10 h-10 rounded-full bg-black/70 text-white flex items-center justify-center hover:bg-black/90 transition-colors border-0 cursor-pointer shadow"
               aria-label="Close event modal"
             >
               &#10005;
             </button>
 
             {/* Gallery Photo Viewport */}
-            <div className="relative w-full aspect-[16/10] bg-tapas-pastel shrink-0">
+            <div className="relative w-full aspect-[16/10] max-h-[42vh] bg-tapas-pastel shrink-0">
               <Image
                 src={selectedEvent.photos[galleryIndex]}
                 alt={`${selectedEvent.name} photo ${galleryIndex + 1}`}
@@ -246,7 +245,7 @@ export default function EventSlideshow({ events }: EventSlideshowProps) {
                       e.stopPropagation();
                       setGalleryIndex((prev) => (prev - 1 + selectedEvent.photos.length) % selectedEvent.photos.length);
                     }}
-                    className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/55 text-white flex items-center justify-center hover:bg-black/80 transition-colors border-0 cursor-pointer shadow"
+                    className="absolute left-2.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-black/85 transition-colors border-0 cursor-pointer shadow z-10"
                     aria-label="Previous photo"
                   >
                     &#8249;
@@ -257,12 +256,12 @@ export default function EventSlideshow({ events }: EventSlideshowProps) {
                       e.stopPropagation();
                       setGalleryIndex((prev) => (prev + 1) % selectedEvent.photos.length);
                     }}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/55 text-white flex items-center justify-center hover:bg-black/80 transition-colors border-0 cursor-pointer shadow"
+                    className="absolute right-2.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-black/85 transition-colors border-0 cursor-pointer shadow z-10"
                     aria-label="Next photo"
                   >
                     &#8250;
                   </button>
-                  <div className="absolute bottom-3 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-black/60 text-white text-xs font-semibold">
+                  <div className="absolute bottom-2.5 left-1/2 -translate-x-1/2 px-2.5 py-1 rounded-full bg-black/65 text-white text-[0.7rem] sm:text-xs font-semibold">
                     {galleryIndex + 1} / {selectedEvent.photos.length}
                   </div>
                 </>
@@ -270,22 +269,22 @@ export default function EventSlideshow({ events }: EventSlideshowProps) {
             </div>
 
             {/* Modal Body */}
-            <div className="p-6 sm:p-8 overflow-y-auto flex flex-col gap-4">
+            <div className="p-4 sm:p-6 md:p-8 overflow-y-auto flex flex-col gap-3 sm:gap-4">
               <div className="flex flex-col gap-1.5">
                 <h3
                   id="event-modal-title"
-                  className="font-heading text-2xl font-semibold text-tapas-text leading-snug"
+                  className="font-heading text-lg sm:text-2xl font-semibold text-tapas-text leading-snug"
                 >
                   {selectedEvent.name}
                 </h3>
-                <div className="flex flex-wrap items-center gap-2 pt-1">
+                <div className="flex flex-wrap items-center gap-2 pt-0.5">
                   {selectedEvent.date && (
-                    <span className="inline-flex items-center text-xs font-semibold px-2.5 py-1 rounded-full bg-tapas-pastel text-tapas-accent">
+                    <span className="inline-flex items-center text-[0.75rem] sm:text-xs font-semibold px-2.5 py-1 rounded-full bg-tapas-pastel text-tapas-accent">
                       📅 {selectedEvent.date}
                     </span>
                   )}
                   {selectedEvent.students && (
-                    <span className="inline-flex items-center text-xs font-semibold px-2.5 py-1 rounded-full bg-tapas-pastel text-tapas-accent">
+                    <span className="inline-flex items-center text-[0.75rem] sm:text-xs font-semibold px-2.5 py-1 rounded-full bg-tapas-pastel text-tapas-accent">
                       👥 {selectedEvent.students}
                     </span>
                   )}
@@ -296,10 +295,10 @@ export default function EventSlideshow({ events }: EventSlideshowProps) {
                 {selectedEvent.description}
               </p>
 
-              <div className="pt-4 border-t border-tapas-border flex items-center justify-between">
+              <div className="pt-3 sm:pt-4 border-t border-tapas-border flex items-center justify-between">
                 <Link
                   href="/events"
-                  className="text-sm font-semibold text-tapas-accent hover:underline inline-flex items-center gap-1.5"
+                  className="text-xs sm:text-sm font-semibold text-tapas-accent hover:underline inline-flex items-center gap-1.5 py-2"
                   onClick={() => setSelectedEvent(null)}
                 >
                   <span>View all events</span>
@@ -308,7 +307,7 @@ export default function EventSlideshow({ events }: EventSlideshowProps) {
                 <button
                   type="button"
                   onClick={() => setSelectedEvent(null)}
-                  className="text-xs font-semibold text-tapas-muted hover:text-tapas-text bg-transparent border-0 cursor-pointer"
+                  className="px-4 py-2 min-h-[44px] rounded-[6px] bg-tapas-accent text-white text-xs sm:text-sm font-semibold hover:bg-tapas-accent-hover transition-colors border-0 cursor-pointer"
                 >
                   Close
                 </button>

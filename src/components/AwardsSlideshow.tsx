@@ -53,8 +53,8 @@ export default function AwardsSlideshow({ awards }: AwardsSlideshowProps) {
   const handleTouchEnd = () => {
     if (touchStartX.current === null || touchEndX.current === null) return;
     const diff = touchStartX.current - touchEndX.current;
-    if (diff > 50) nextSlide();
-    else if (diff < -50) prevSlide();
+    if (diff > 40) nextSlide();
+    else if (diff < -40) prevSlide();
     touchStartX.current = null;
     touchEndX.current = null;
   };
@@ -81,7 +81,7 @@ export default function AwardsSlideshow({ awards }: AwardsSlideshowProps) {
   return (
     <div className="w-full">
       {/* Section Header */}
-      <div className="text-center max-w-[800px] mx-auto mb-8">
+      <div className="text-center max-w-[800px] mx-auto mb-6 sm:mb-8 px-1">
         <span className="text-xs font-bold uppercase tracking-[0.14em] text-tapas-accent mb-2 block">
           Recognitions &amp; Honors
         </span>
@@ -96,7 +96,7 @@ export default function AwardsSlideshow({ awards }: AwardsSlideshowProps) {
       {/* Large Full-width Slideshow Container */}
       <div className="relative w-full max-w-5xl mx-auto">
         <div
-          className="relative bg-tapas-soft border border-tapas-border rounded-[18px] overflow-hidden shadow-sm group select-none"
+          className="relative bg-tapas-soft border border-tapas-border rounded-[14px] sm:rounded-[18px] overflow-hidden shadow-sm group select-none"
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
           onTouchStart={handleTouchStart}
@@ -106,7 +106,7 @@ export default function AwardsSlideshow({ awards }: AwardsSlideshowProps) {
           {/* Main Slide Card */}
           <div
             onClick={() => setSelectedAward(currentAward)}
-            className="cursor-pointer relative aspect-[16/9] sm:aspect-[21/10] w-full bg-tapas-pastel overflow-hidden"
+            className="cursor-pointer relative aspect-[16/11] sm:aspect-[21/10] w-full bg-tapas-pastel overflow-hidden"
             role="button"
             tabIndex={0}
             onKeyDown={(e) => {
@@ -124,22 +124,22 @@ export default function AwardsSlideshow({ awards }: AwardsSlideshowProps) {
               priority={currentIndex === 0}
               loading={currentIndex === 0 ? 'eager' : 'lazy'}
               decoding="async"
-              sizes="(max-width: 1024px) 100vw, 1024px"
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 90vw, 1024px"
               className={`${
                 currentAward.isPoster ? 'object-contain bg-tapas-pastel/50' : 'object-cover'
               } transition-transform duration-700 ease-out group-hover:scale-105`}
             />
 
             {/* Award Title Caption Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent flex flex-col justify-end p-6 sm:p-10">
-              <span className="text-xs uppercase font-bold tracking-widest text-white/80 mb-1.5">
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-transparent flex flex-col justify-end p-4 sm:p-8 md:p-10">
+              <span className="text-[0.7rem] sm:text-xs uppercase font-bold tracking-widest text-white/80 mb-1">
                 Honor ({currentIndex + 1} of {total})
               </span>
-              <h3 className="font-heading text-lg sm:text-2xl font-semibold text-white leading-snug max-w-3xl">
+              <h3 className="font-heading text-sm sm:text-xl md:text-2xl font-semibold text-white leading-snug line-clamp-3 sm:line-clamp-none max-w-3xl">
                 {currentAward.title}
               </h3>
-              <p className="text-xs sm:text-sm text-white/90 mt-2 font-medium flex items-center gap-1.5">
-                <span>Click slide to view award details</span>
+              <p className="text-[0.75rem] sm:text-xs text-white/90 mt-1.5 sm:mt-2 font-medium flex items-center gap-1.5">
+                <span>Tap to view details</span>
                 <span>&rarr;</span>
               </p>
             </div>
@@ -152,7 +152,7 @@ export default function AwardsSlideshow({ awards }: AwardsSlideshowProps) {
               e.stopPropagation();
               prevSlide();
             }}
-            className="absolute left-3.5 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/45 text-white flex items-center justify-center hover:bg-black/75 transition-colors border-0 cursor-pointer shadow"
+            className="absolute left-2 sm:left-3.5 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-black/75 transition-colors border-0 cursor-pointer shadow z-10"
             aria-label="Previous award slide"
           >
             &#8249;
@@ -165,7 +165,7 @@ export default function AwardsSlideshow({ awards }: AwardsSlideshowProps) {
               e.stopPropagation();
               nextSlide();
             }}
-            className="absolute right-3.5 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/45 text-white flex items-center justify-center hover:bg-black/75 transition-colors border-0 cursor-pointer shadow"
+            className="absolute right-2 sm:right-3.5 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-black/75 transition-colors border-0 cursor-pointer shadow z-10"
             aria-label="Next award slide"
           >
             &#8250;
@@ -173,7 +173,7 @@ export default function AwardsSlideshow({ awards }: AwardsSlideshowProps) {
         </div>
 
         {/* Dot Indicators */}
-        <div className="flex justify-center items-center gap-2 mt-5">
+        <div className="flex justify-center items-center gap-2 mt-4 sm:mt-5">
           {awards.map((aw, idx) => (
             <button
               key={aw.id}
@@ -181,8 +181,8 @@ export default function AwardsSlideshow({ awards }: AwardsSlideshowProps) {
               onClick={() => setCurrentIndex(idx)}
               className={`transition-all duration-300 rounded-full border-0 cursor-pointer p-0 ${
                 idx === currentIndex
-                  ? 'w-7 h-2.5 bg-tapas-accent'
-                  : 'w-2.5 h-2.5 bg-tapas-border hover:bg-tapas-muted'
+                  ? 'w-6 sm:w-7 h-2 sm:h-2.5 bg-tapas-accent'
+                  : 'w-2 sm:w-2.5 h-2 sm:h-2.5 bg-tapas-border hover:bg-tapas-muted'
               }`}
               aria-label={`Go to award ${idx + 1}`}
             />
@@ -196,11 +196,11 @@ export default function AwardsSlideshow({ awards }: AwardsSlideshowProps) {
           role="dialog"
           aria-modal="true"
           aria-labelledby="award-modal-title"
-          className="fixed inset-0 z-[1000] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 md:p-6"
+          className="fixed inset-0 z-[1000] bg-black/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6"
           onClick={() => setSelectedAward(null)}
         >
           <div
-            className="relative max-w-2xl w-full bg-tapas-soft rounded-[18px] overflow-hidden shadow-2xl border border-tapas-border flex flex-col max-h-[90vh]"
+            className="relative max-w-2xl w-full bg-tapas-soft rounded-[14px] sm:rounded-[18px] overflow-hidden shadow-2xl border border-tapas-border flex flex-col max-h-[90vh]"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
@@ -208,14 +208,14 @@ export default function AwardsSlideshow({ awards }: AwardsSlideshowProps) {
               ref={modalCloseRef}
               type="button"
               onClick={() => setSelectedAward(null)}
-              className="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-black/65 text-white flex items-center justify-center hover:bg-black/85 transition-colors border-0 cursor-pointer shadow"
+              className="absolute top-3 right-3 sm:top-4 sm:right-4 z-20 w-10 h-10 rounded-full bg-black/70 text-white flex items-center justify-center hover:bg-black/90 transition-colors border-0 cursor-pointer shadow"
               aria-label="Close award modal"
             >
               &#10005;
             </button>
 
             {/* Large Award Image */}
-            <div className="relative w-full aspect-[16/10] bg-tapas-pastel shrink-0">
+            <div className="relative w-full aspect-[16/10] max-h-[42vh] bg-tapas-pastel shrink-0">
               <Image
                 src={selectedAward.photo}
                 alt={selectedAward.title}
@@ -227,13 +227,13 @@ export default function AwardsSlideshow({ awards }: AwardsSlideshowProps) {
             </div>
 
             {/* Modal Body */}
-            <div className="p-6 sm:p-8 overflow-y-auto flex flex-col gap-4">
-              <span className="text-xs font-bold uppercase tracking-wider text-tapas-accent">
+            <div className="p-4 sm:p-6 md:p-8 overflow-y-auto flex flex-col gap-3 sm:gap-4">
+              <span className="text-[0.7rem] sm:text-xs font-bold uppercase tracking-wider text-tapas-accent">
                 Honor &amp; Recognition
               </span>
               <h3
                 id="award-modal-title"
-                className="font-heading text-xl sm:text-2xl font-semibold text-tapas-text leading-snug"
+                className="font-heading text-lg sm:text-xl md:text-2xl font-semibold text-tapas-text leading-snug"
               >
                 {selectedAward.title}
               </h3>
@@ -241,11 +241,11 @@ export default function AwardsSlideshow({ awards }: AwardsSlideshowProps) {
                 {selectedAward.description}
               </p>
 
-              <div className="pt-4 border-t border-tapas-border flex items-center justify-end">
+              <div className="pt-3 sm:pt-4 border-t border-tapas-border flex items-center justify-end">
                 <button
                   type="button"
                   onClick={() => setSelectedAward(null)}
-                  className="px-5 py-2 rounded-[6px] bg-tapas-accent text-white text-sm font-semibold hover:bg-tapas-accent-hover transition-colors border-0 cursor-pointer"
+                  className="px-5 py-2.5 min-h-[44px] rounded-[6px] bg-tapas-accent text-white text-sm font-semibold hover:bg-tapas-accent-hover transition-colors border-0 cursor-pointer"
                 >
                   Close
                 </button>

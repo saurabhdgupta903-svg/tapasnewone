@@ -33,10 +33,10 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-[100] bg-tapas-soft border-b border-tapas-border w-full shadow-xs">
-      <div className="w-full max-w-[1200px] mx-auto px-5 md:px-8 flex items-center justify-between h-[4.5rem] py-2">
+      <div className="w-full max-w-[1200px] mx-auto px-4 sm:px-6 md:px-8 flex items-center justify-between h-[4.25rem] sm:h-[4.5rem] py-2">
         {/* Brand Logo */}
         <Link href="/" className="flex items-center text-decoration-none" onClick={closeMenu}>
-          <div className="relative h-[2.75rem] w-[140px]">
+          <div className="relative h-[2.4rem] sm:h-[2.75rem] w-[120px] sm:w-[140px]">
             <Image
               src="/images/tapas-logo.png"
               alt="TAPAS Logo"
@@ -74,7 +74,7 @@ export default function Navbar() {
         <div className="hidden min-[992px]:block">
           <Link
             href="/join"
-            className="inline-flex items-center justify-center bg-tapas-accent text-white px-5 py-[0.6rem] rounded-[6px] text-[0.95rem] font-semibold transition-colors duration-200 hover:bg-tapas-accent-hover shadow-sm"
+            className="inline-flex items-center justify-center bg-tapas-accent text-white px-5 py-[0.6rem] min-h-[40px] rounded-[6px] text-[0.95rem] font-semibold transition-colors duration-200 hover:bg-tapas-accent-hover shadow-sm"
           >
             Join Us
           </Link>
@@ -83,7 +83,7 @@ export default function Navbar() {
         {/* Hamburger Menu Toggle Button (Mobile) */}
         <button
           type="button"
-          className="flex flex-col justify-center items-center w-10 h-10 p-1 bg-transparent border border-tapas-border rounded-[6px] gap-[5px] min-[992px]:hidden cursor-pointer"
+          className="flex flex-col justify-center items-center w-11 h-11 p-2 bg-transparent border border-tapas-border rounded-[6px] gap-[5px] min-[992px]:hidden cursor-pointer"
           onClick={toggleMenu}
           aria-expanded={menuOpen}
           aria-label="Toggle navigation menu"
@@ -108,18 +108,18 @@ export default function Navbar() {
 
       {/* Mobile Drawer Menu */}
       {menuOpen && (
-        <div className="flex flex-col bg-tapas-soft border-t border-tapas-border px-6 pt-5 pb-8 gap-5 min-[992px]:hidden">
-          <ul className="list-none flex flex-col gap-4">
+        <div className="flex flex-col bg-tapas-soft border-t border-tapas-border px-5 pt-4 pb-6 gap-3 min-[992px]:hidden">
+          <ul className="list-none flex flex-col gap-1">
             {navLinks.map((item) => {
               const active = isActive(item.href);
               return (
                 <li key={item.name}>
                   <Link
                     href={item.href}
-                    className={`text-[1.05rem] font-medium inline-block py-1 transition-colors duration-200 ${
+                    className={`text-[1.05rem] font-medium flex items-center py-2.5 px-2 rounded-[4px] min-h-[44px] transition-colors duration-200 ${
                       active
-                        ? 'text-tapas-accent underline underline-offset-[6px] decoration-2'
-                        : 'text-tapas-text hover:text-tapas-accent'
+                        ? 'text-tapas-accent font-semibold bg-tapas-pastel/60'
+                        : 'text-tapas-text hover:text-tapas-accent hover:bg-tapas-pastel/40'
                     }`}
                     onClick={closeMenu}
                   >
@@ -129,10 +129,10 @@ export default function Navbar() {
               );
             })}
           </ul>
-          <div className="mt-2">
+          <div className="mt-2 pt-2 border-t border-tapas-border/60">
             <Link
               href="/join"
-              className="block text-center bg-tapas-accent text-white px-5 py-3 rounded-[6px] font-semibold transition-colors duration-200 hover:bg-tapas-accent-hover shadow-sm"
+              className="flex items-center justify-center w-full text-center bg-tapas-accent text-white px-5 py-3 min-h-[44px] rounded-[6px] font-semibold transition-colors duration-200 hover:bg-tapas-accent-hover shadow-sm text-base"
               onClick={closeMenu}
             >
               Join Us

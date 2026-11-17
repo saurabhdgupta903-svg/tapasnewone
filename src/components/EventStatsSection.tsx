@@ -1,57 +1,93 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
-import { EventStatItem } from '@/types';
+import { useState, useEffect, useRef } from 'react';
 
-interface EventStatsSectionProps {
-  stats: EventStatItem[];
+interface StatBoxItem {
+  id: string;
+  targetNum?: number;
+  displayText: string;
+  label: string;
+  animate: boolean;
 }
 
-function StatCard({ stat }: { stat: EventStatItem }) {
+const STATS_DATA: StatBoxItem[] = [
+  { id: 'students', targetNum: 20000, displayText: '20000+', label: 'Students', animate: true },
+  { id: 'sessions', targetNum: 200, displayText: '200+', label: 'Sessions', animate: true },
+  { id: 'since', displayText: '2019', label: 'Since', animate: false },
+];
+
+function StatCardItem({ item, inView }: { item: StatBoxItem; inView: boolean }) {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!item.animate || !inView || !item.targetNum) return;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setCount(item.targetNum);
+      return;
+    }
+
+    const duration = 1400; // ms
+    const startTime = performance.now();
+    const endValue = item.targetNum;
+
+    const updateCount = (currentTime: number) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const easeOut = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.floor(easeOut * endValue));
+
+      if (progress < 1) {
+        requestAnimationFrame(updateCount);
+      } else {
+        setCount(endValue);
+      }
+    };
+
+    const frameId = requestAnimationFrame(updateCount);
+    return () => cancelAnimationFrame(frameId);
+  }, [inView, item.animate, item.targetNum]);
+
+  const displayValue = item.animate ? `${count}+` : item.displayText;
+
   return (
-    <div className="tapas-marquee-card bg-tapas-soft border border-tapas-border rounded-[14px] p-6 shadow-sm flex flex-col justify-between text-center min-w-[180px] max-w-[200px] min-h-[140px] shrink-0 select-none">
-      {/* Number */}
-      <div className="flex flex-col items-center">
-        <div className="font-heading text-3xl sm:text-4xl font-extrabold text-tapas-accent leading-none">
-          {stat.targetNum}+
-        </div>
-        {stat.suffix ? (
-          <span className="text-xs font-semibold uppercase tracking-wider text-tapas-muted mt-1.5 h-4">
-            {stat.suffix}
-          </span>
-        ) : (
-          <span className="h-4 mt-1.5" aria-hidden="true" />
-        )}
+    <div className="bg-tapas-soft border border-tapas-border rounded-[14px] p-6 sm:p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md flex flex-col items-center justify-center text-center">
+      <div className="font-heading text-3xl sm:text-4xl lg:text-[2.75rem] font-extrabold text-tapas-accent leading-none mb-2">
+        {displayValue}
       </div>
-      {/* Event Name */}
-      <div className="pt-3 border-t border-tapas-border/60">
-        <h3 className="font-heading text-base font-semibold text-tapas-text leading-snug">
-          {stat.event}
-        </h3>
+      <div className="font-heading text-base sm:text-lg font-semibold text-tapas-text tracking-wide">
+        {item.label}
       </div>
     </div>
   );
 }
 
-export default function EventStatsSection({ stats }: EventStatsSectionProps) {
-  const trackRef = useRef<HTMLDivElement>(null);
-  const [prefersReduced, setPrefersReduced] = useState(false);
+export default function EventStatsSection() {
+  const [inView, setInView] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setPrefersReduced(mq.matches);
-    const handler = (e: MediaQueryListEvent) => setPrefersReduced(e.matches);
-    mq.addEventListener('change', handler);
-    return () => mq.removeEventListener('change', handler);
+    const el = containerRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setInView(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.15 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
   }, []);
 
-  // Duplicate items for seamless loop
-  const doubled = [...stats, ...stats];
-
   return (
-    <div className="w-full">
-      {/* Intro / Heading */}
-      <div className="text-center max-w-[800px] mx-auto mb-10">
+    <div ref={containerRef} className="w-full">
+      {/* Heading Line */}
+      <div className="text-center max-w-[800px] mx-auto mb-10 px-1">
         <span className="text-xs font-bold uppercase tracking-[0.14em] text-tapas-accent mb-2 block">
           Proven Reach &amp; Impact
         </span>
@@ -65,44 +101,12 @@ export default function EventStatsSection({ stats }: EventStatsSectionProps) {
         </p>
       </div>
 
-      {/* Marquee or static scrollable row */}
-      {prefersReduced ? (
-        // Reduced-motion: simple horizontal scroll
-        <div className="flex gap-4 overflow-x-auto pb-3 snap-x">
-          {stats.map((stat, i) => (
-            <div key={i} className="snap-start">
-              <StatCard stat={stat} />
-            </div>
-          ))}
-        </div>
-      ) : (
-        <div
-          className="relative overflow-hidden"
-          style={{ maskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)' }}
-        >
-          <div
-            ref={trackRef}
-            className="flex gap-4 tapas-marquee-track"
-            style={{ width: 'max-content' }}
-            onMouseEnter={() => {
-              if (trackRef.current) trackRef.current.style.animationPlayState = 'paused';
-            }}
-            onMouseLeave={() => {
-              if (trackRef.current) trackRef.current.style.animationPlayState = 'running';
-            }}
-            onTouchStart={() => {
-              if (trackRef.current) trackRef.current.style.animationPlayState = 'paused';
-            }}
-            onTouchEnd={() => {
-              if (trackRef.current) trackRef.current.style.animationPlayState = 'running';
-            }}
-          >
-            {doubled.map((stat, i) => (
-              <StatCard key={i} stat={stat} />
-            ))}
-          </div>
-        </div>
-      )}
+      {/* 3 Stat Boxes: 1 row on tablet/desktop, stacked on mobile (no horizontal scroll) */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 max-w-4xl mx-auto w-full">
+        {STATS_DATA.map((item) => (
+          <StatCardItem key={item.id} item={item} inView={inView} />
+        ))}
+      </div>
     </div>
   );
 }

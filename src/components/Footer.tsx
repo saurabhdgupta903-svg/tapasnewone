@@ -159,8 +159,8 @@ export default function Footer() {
       url: 'http://www.srcm.org/',
     },
     {
-      title: 'Spirituality Foundation',
-      url: 'https://youtu.be/gDClb-yjNdQ?si=xFS-GZAxm7IByxzk',
+      title: 'Heartfulness Meditation Technique',
+      url: 'https://www.youtube.com/watch?v=gDClb-yjNdQ',
     },
   ];
 
@@ -180,8 +180,10 @@ export default function Footer() {
                 />
               </div>
             </Link>
-            <p className="text-[1.05rem] font-medium text-tapas-text leading-snug max-w-[22rem]">
-              RELAX&nbsp;•&nbsp;MEDITATE&nbsp;•&nbsp;REJUVENATE&nbsp;•&nbsp;CONNECT
+            <p className="text-[0.95rem] sm:text-[1.05rem] font-semibold text-tapas-text leading-snug max-w-[22rem]">
+              <span className="inline-block">RELAX • MEDITATE</span>
+              <span className="hidden sm:inline"> • </span>
+              <span className="block sm:inline sm:mt-0">REJUVENATE • CONNECT</span>
             </p>
             <p className="text-[0.92rem] text-tapas-muted leading-[1.6] max-w-[24rem]">
               Emphasizing the mental well-being of students through guided Heartfulness meditation,
@@ -238,17 +240,17 @@ export default function Footer() {
               </ul>
             </div>
 
-            <div>
+            <div className="flex flex-col items-start gap-1">
               <h4 className="text-[0.92rem] font-semibold text-tapas-text mb-1">Get in Touch</h4>
               <a
                 href="mailto:tapas.pce@mes.ac.in"
-                className="text-[0.9rem] text-tapas-muted hover:text-tapas-accent transition-colors duration-200 underline"
+                className="text-[0.92rem] text-tapas-muted hover:text-tapas-accent transition-colors duration-200 underline py-1 inline-block"
               >
                 tapas.pce@mes.ac.in
               </a>
               <a
                 href="tel:+919324281653"
-                className="text-[0.9rem] text-tapas-muted hover:text-tapas-accent transition-colors duration-200 underline block mt-1"
+                className="text-[0.92rem] text-tapas-muted hover:text-tapas-accent transition-colors duration-200 underline py-1 inline-block"
               >
                 93242 81653
               </a>
@@ -266,12 +268,12 @@ export default function Footer() {
             <span>&copy; {new Date().getFullYear()} All rights reserved.</span>
           </div>
 
-          <div className="flex items-center gap-4 text-tapas-muted">
+          <div className="flex items-center gap-2 text-tapas-muted">
             <a
               href="https://www.instagram.com/tapas.pce"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-1.5 rounded-full transition-colors duration-200 hover:text-tapas-accent hover:bg-tapas-pastel"
+              className="w-11 h-11 flex items-center justify-center rounded-full transition-colors duration-200 hover:text-tapas-accent hover:bg-tapas-pastel"
               aria-label="TAPAS on Instagram"
             >
               <IconInstagram />
@@ -280,7 +282,7 @@ export default function Footer() {
               href="https://www.facebook.com/profile.php?id=100092632995551"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-1.5 rounded-full transition-colors duration-200 hover:text-tapas-accent hover:bg-tapas-pastel"
+              className="w-11 h-11 flex items-center justify-center rounded-full transition-colors duration-200 hover:text-tapas-accent hover:bg-tapas-pastel"
               aria-label="TAPAS on Facebook"
             >
               <IconFacebook />
@@ -289,7 +291,7 @@ export default function Footer() {
               href="https://www.linkedin.com/in/tapas-pce-ab809a1a9/"
               target="_blank"
               rel="noopener noreferrer"
-              className="p-1.5 rounded-full transition-colors duration-200 hover:text-tapas-accent hover:bg-tapas-pastel"
+              className="w-11 h-11 flex items-center justify-center rounded-full transition-colors duration-200 hover:text-tapas-accent hover:bg-tapas-pastel"
               aria-label="TAPAS on LinkedIn"
             >
               <IconLinkedIn />
