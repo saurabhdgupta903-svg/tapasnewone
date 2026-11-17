@@ -32,7 +32,7 @@ export const awardsData: AwardItem[] = [
   {
     id: 'best-heartful-campus',
     title: 'Best Heartful Campus Award',
-    photo: '/images/events/best-heartful-campus.jpg',
+    photo: '/images/events/best-heartful-campus-2.jpg',
     description:
       'Presented to Pillai University\'s Pillai College of Engineering, Navi Mumbai, celebrating outstanding institutional dedication to student mental health, campus well-being, and Heartfulness practices.',
   },

@@ -23,7 +23,7 @@ export const testimonials: TestimonialItem[] = [
     text: "Being a part of TAPAS has been one of the most meaningful experiences of my college life. From starting as a member to becoming the Secretary and Event Head, this journey helped me step out of my comfort zone, build confidence, and discover my ability to lead and take responsibility.\n\nFrom being a part of large-scale events involving around 8,000 students to coordinating at the iconic Gateway of India and celebrating the achievement of the National Heartful Campus Award, every milestone has been special.\n\nLooking back, I realise that while I was contributing to TAPAS\u2019s journey, TAPAS was shaping mine too. It has given me lessons, friendships, experiences, and memories that I will carry with me long after college.\n\nSeeing TAPAS grow, create an impact, and reach new milestones throughout my journey has been one of the most fulfilling feelings. I couldn\u2019t be happier to have been a part of this beautiful journey. Forever grateful \u2764\uFE0F",
     name: 'Aditi Muni',
     role: 'Secretary and Event Head (2025-26)',
-    photo: '/images/aditi-muni.png',
+    photo: '/images/aditi-muni-1.jpeg',
     isPortrait: true,
   },
 ];
