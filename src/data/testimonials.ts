@@ -26,4 +26,10 @@ export const testimonials: TestimonialItem[] = [
     photo: '/images/aditi-muni-1.jpeg',
     isPortrait: true,
   },
+  {
+    text: "My journey with TAPAS has been a truly peaceful and enriching experience. Being part of this meditation committee has helped me find inner peace, improve my mindfulness, and develop a more positive outlook on life. TAPAS has given me a supportive space to grow, connect with like-minded people, and discover the power of meditation. I'm grateful to be a part of this beautiful journey.",
+    name: 'Soham Kokate',
+    role: 'Publicity Head (2025-26)',
+    photo: '/images/soham-kokate.jpg',
+  },
 ];

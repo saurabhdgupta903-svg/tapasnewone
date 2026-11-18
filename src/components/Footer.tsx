@@ -135,16 +135,6 @@ function IconYouTube() {
 }
 
 export default function Footer() {
-  const pageLinks = [
-    { title: 'Home', href: '/' },
-    { title: 'About', href: '/about' },
-    { title: 'Team', href: '/team' },
-    { title: 'Events', href: '/events' },
-    { title: 'Gallery', href: '/gallery' },
-    { title: 'Resources', href: '/resources' },
-    { title: 'Join Us', href: '/join' },
-  ];
-
   const heartfulnessNetwork: NetworkLink[] = [
     {
       title: 'Daaji, the Global Guide of Heartfulness',
@@ -167,9 +157,9 @@ export default function Footer() {
   return (
     <footer className="bg-tapas-soft border-t border-tapas-border pt-14 pb-8 mt-auto">
       <div className="w-full max-w-[1200px] mx-auto px-5 md:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8 pb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 pb-12">
           {/* Left Column */}
-          <div className="md:col-span-5 flex flex-col items-start gap-4">
+          <div className="flex flex-col items-start gap-4">
             <Link href="/" className="inline-block" aria-label="TAPAS Home">
               <div className="relative h-[3rem] w-[150px]">
                 <Image
@@ -199,27 +189,8 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Middle Column: Pages Navigation Links */}
-          <div className="md:col-span-3">
-            <h3 className="text-[1.1rem] mb-4 text-tapas-text font-heading font-semibold">
-              Pages
-            </h3>
-            <ul className="list-none flex flex-col gap-[0.55rem]">
-              {pageLinks.map((item) => (
-                <li key={item.title}>
-                  <Link
-                    href={item.href}
-                    className="text-[0.92rem] text-tapas-muted inline-block transition-colors duration-200 hover:text-tapas-accent hover:underline"
-                  >
-                    {item.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
           {/* Right Column: Heartfulness Network */}
-          <div className="md:col-span-4 flex flex-col gap-6">
+          <div className="flex flex-col gap-6">
             <div>
               <h3 className="text-[1.1rem] mb-4 text-tapas-text font-heading font-semibold">
                 Heartfulness Network
